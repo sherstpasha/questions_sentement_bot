@@ -83,4 +83,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 predictions = get_predictions(model, dataloader, device)
 
-print(predictions)
+df_predictions = pd.DataFrame(predictions, columns=['is_relevant', 'object', 'is_positive'])
+
+print(df_predictions.head())
+df_predictions.to_csv("predictions.csv", index=False)

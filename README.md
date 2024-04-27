@@ -24,14 +24,24 @@ docker build -t multi_task_bert .
 4. Запустите контейнер с графическим процессором (при необходимости монтируйте папку с данными):
 
 ```bash
-docker run --gpus all -it -v /путь/к/вашей/папке:/путь/внутри/контейнера/mounted_folder multi_task_bert
+docker run --gpus all -it -v /путь/к/вашей/папке:/app/mounted_folder multi_task_bert
 ```
 
 5. Теперь, когда вы находитесь в контейнере, вы можете запустить `train.py` с помощью следующей команды, чтобы начать обучение модели:
 
 ```bash
-python3.10 train.py --epoch=100 --lr_start=5e-5 --train_data_path="train_data_questions_text.csv"
+python3.10 train.py --epoch=100 --lr_start=5e-5 --train_data_path="mounted_folder/train_file.csv"
 ```
+
+6. После окончания обучения в докере сохраняется модель с названием "best_model.pth". Чтобы перенести ее на вашу систему, выполните следующую команду `docker cp`, указав путь к файлу `best_model.pth` в контейнере и путь на вашей системе, куда вы хотите скопировать файл.
+
+Вот пример:
+
+```bash
+docker cp <container_id>:/app/best_model.pth .
+```
+
+Где `<container_id>` - это идентификатор вашего контейнера, а `/путь/на/вашей/системе/` - путь к папке на вашей системе, куда вы хотите скопировать файл `best_model.pth`.
 
 ## Важно
 
@@ -39,7 +49,7 @@ python3.10 train.py --epoch=100 --lr_start=5e-5 --train_data_path="train_data_qu
 
 ---
 
-### Описание файла CSV
+### Описание файла CSV для обучения
 
 Файл CSV с набором данных должен содержать следующие столбцы:
 

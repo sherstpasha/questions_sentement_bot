@@ -1,23 +1,19 @@
-from torch.utils.data import Sampler
-import numpy as np
 import torch
 from torch.utils.data import DataLoader, Dataset
 from transformers import AutoModel, AutoTokenizer, AdamW
 from sklearn.model_selection import train_test_split
 import torch.nn as nn
-import matplotlib.pyplot as plt
 import torch.nn.functional as F
 import pandas as pd
 from torch.optim.lr_scheduler import ReduceLROnPlateau
 import argparse
 
 
-parser = argparse.ArgumentParser(description='Multi-task BERT training script')
+parser = argparse.ArgumentParser(description='Multi-task training script')
 
-parser.add_argument('--epochs', type=int, default=50, help='Number of epochs for training')
-parser.add_argument('--lr_start', type=float, default=5e-5, help='Initial learning rate')
-parser.add_argument('--train_data_path', type=str, default='train_data_questions_text.csv', help='Path to the training data CSV file')
-
+parser.add_argument('--epochs', type=int, required=True, help='Number of epochs for training')
+parser.add_argument('--lr_start', type=float, required=True, help='Initial learning rate')
+parser.add_argument('--train_data_path', type=str, required=True, help='Path to the training data CSV file')
 
 args = parser.parse_args()
 

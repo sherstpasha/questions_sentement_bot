@@ -61,29 +61,50 @@ def get_predictions(model, dataloader, device):
     return predictions
 
 
-parser = argparse.ArgumentParser(description='Run predictions with MultiTaskBERT')
-parser.add_argument('--file_path', type=str, required=True, help='Path to the CSV file with texts')
-parser.add_argument('--model_path', type=str, required=True, help='Path to the trained model file')
-args = parser.parse_args()
+def predict_single_input(text, max_len=128):
+    model = load_model("src/model_original_data.pth")
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    tokenizer = AutoTokenizer.from_pretrained("google/canine-c")
+    encoding = tokenizer(text, add_special_tokens=True, 
+                         max_length=max_len, padding='max_length', 
+                         truncation=True, return_tensors='pt')
+    input_ids = encoding['input_ids'].to(device)
+    attention_mask = encoding['attention_mask'].to(device)
+
+    model.eval()
+
+    with torch.no_grad():
+        probabilities = model(input_ids=input_ids, attention_mask=attention_mask)
+
+    predicted_probabilities = [prob[0].tolist() for prob in probabilities]
+    predicted_classes = [prob.argmax().item() for prob in probabilities]
+
+    return predicted_classes
 
 
-file_path = args.file_path
-model_path = args.model_path
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='Run predictions with MultiTaskBERT')
+    parser.add_argument('--file_path', type=str, required=True, help='Path to the CSV file with texts')
+    parser.add_argument('--model_path', type=str, required=True, help='Path to the trained model file')
+    args = parser.parse_args()
 
-data = pd.read_csv(file_path)
-texts = data['text'].values
+    file_path = args.file_path
+    model_path = args.model_path
 
-tokenizer = AutoTokenizer.from_pretrained("google/canine-c")
-dataset = PredictionDataset(texts, tokenizer)
-dataloader = DataLoader(dataset, batch_size=4, shuffle=False)
+    data = pd.read_csv(file_path)
+    texts = data['text'].values
 
-model = load_model(model_path)
+    tokenizer = AutoTokenizer.from_pretrained("google/canine-c")
+    dataset = PredictionDataset(texts, tokenizer)
+    dataloader = DataLoader(dataset, batch_size=4, shuffle=False)
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    model = load_model(model_path)
 
-predictions = get_predictions(model, dataloader, device)
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-df_predictions = pd.DataFrame(predictions, columns=['is_relevant', 'object', 'is_positive'])
+    predictions = get_predictions(model, dataloader, device)
 
-print(df_predictions.head())
-df_predictions.to_csv("predictions.csv", index=False)
+    df_predictions = pd.DataFrame(predictions, columns=['is_relevant', 'object', 'is_positive'])
+
+    print(df_predictions.head())
+    df_predictions.to_csv("predictions.csv", index=False)

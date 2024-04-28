@@ -1,0 +1,33 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: Django Runserver",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}\\manage.py",
+      "args": ["runserver", 
+               "--nostatic",
+    ],
+      "django": true
+    },
+    {
+      "name": "Python: Django ASGI",
+      "type": "debugpy",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/",
+      "module": "uvicorn",
+      "args": [
+        "geekbrains_backend.asgi:application",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "8000",
+        "--reload",
+        "--log-level",
+        "info"
+      ],
+      "django": true
+    }
+  ]
+}

@@ -19,6 +19,7 @@ Python 3.10 и выше
 >```
 3. Запусть Django
 >```powershell
+>./venv/Scripts/activate
 >uvicorn geekbrains_backend.asgi:application --host 127.0.0.1 --port 8000 --reload --log-level info
 >```
 * Bash

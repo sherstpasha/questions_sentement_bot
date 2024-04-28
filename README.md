@@ -1,3 +1,7 @@
+## Наша обученная модель
+
+https://drive.google.com/file/d/1sPbg-pHksOjTzGYFD-WcYleWIvVlzbxx/view?usp=sharing
+
 ## Зависимости
 
 - Docker

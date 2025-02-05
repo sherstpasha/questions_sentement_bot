@@ -7,7 +7,7 @@
 Python 3.10 и выше
 ***
 ## Как запустить
-1. Скачать модель с [гугл диска]([https://drive.google.com/file/d/1sPbg-pHksOjTzGYFD-WcYleWIvVlzbxx/view](https://drive.google.com/file/d/1NmGcfx5W4TXtQkVs4wAcMpP5qpiKwan4/view?usp=drive_link)) и вставить в папку [src/](src/)
+1. Скачать модель с [гугл диска](https://drive.google.com/file/d/1NmGcfx5W4TXtQkVs4wAcMpP5qpiKwan4/view?usp=drive_link) и вставить в папку [src/](src/)
 2. Установить зависимости
 * Powersheell
 >```powershell

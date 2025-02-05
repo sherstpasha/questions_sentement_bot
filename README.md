@@ -33,10 +33,10 @@
 от студентов после вебинаров.  
 
 ### 👥 Участники команды:
-- [Константин Кожин](https://github.com/konstantinkozhin)  
-- [Павел Шерстнев](https://github.com/sherstpasha)
-- [Владислава Жуковская](https://github.com/vlada2025) 
-- [Михалев Антон](https://github.com/asmikhalev) 
+- [Константин Кожин](https://github.com/konstantinkozhin) — **Руководитель команды;**  
+- [Павел Шерстнев](https://github.com/sherstpasha) — **Data Analyst, Data Scientist;**  
+- [Владислава Жуковская](https://github.com/vlada2025) — **Дизайнер;**  
+- [Михалев Антон](https://github.com/asmikhalev) — **Data Scientist, ML-разработчик.**  
 
 </td>
 <td align="center" width="50%">

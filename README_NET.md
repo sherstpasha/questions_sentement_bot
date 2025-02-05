@@ -1,6 +1,6 @@
 ## Наша обученная модель
 
-https://drive.google.com/file/d/1sPbg-pHksOjTzGYFD-WcYleWIvVlzbxx/view?usp=sharing
+[https://drive.google.com/file/d/1sPbg-pHksOjTzGYFD-WcYleWIvVlzbxx/view?usp=sharing](https://drive.google.com/file/d/1NmGcfx5W4TXtQkVs4wAcMpP5qpiKwan4/view?usp=drive_link)
 
 ## Зависимости
 
